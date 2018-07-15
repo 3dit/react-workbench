@@ -1,61 +1,87 @@
 import React, { Component } from 'react';
-import TodoList from './TodoList';
+import ActionList from './ActionList';
+import { primaryList } from './ListProvider';
 
 class TodoPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { appData: props.appData };
-    
-    //we can create shorter reference to the list,
-    //but when we replace the reference (creating new list when deleting an item)
-    //we have to remember to update the state.appData.list reference.
-    //is this a good idea? Not sure.
-    this.list = this.state.appData.list;
+    this.state = { list: props.list, itemsSnapshot: null };
 
     this.doKey = this.doKey.bind(this);
-    this.deleteTodo = this.deleteTodo.bind(this);
 
+    this.deleteTodo = this.deleteTodo.bind(this);
+    this.addTodo = this.addTodo.bind(this);
+    this.doSnapshot = this.doSnapshot.bind(this);
+    this.getSnapshot = this.getSnapshot.bind(this);
   }
 
   addTodo(todoValue) {
-    var max = 0;
-
-    for (var i = 0; i < this.list.length; i++) {
-      if (this.list[i].id > max) max = this.list[i].id;
-    }
-
-    this.list.push({ id: max + 1, name: todoValue });
-
+    this.state.list.addItem(todoValue);
     this.setState(this.state); //performs optimal redraw if something changed
   }
 
   deleteTodo(id) {
-    this.list = this.list.filter(function (i) { return !(i.id == id) });
-
-    //replacing list reference means state has old reference so we update it
-    this.state.appData.list = this.list;
+    this.state.list.deleteItemById(id);
 
     this.setState(this.state);
   }
 
   doKey(e) {
-    this.state.value = e.target.value;
     if (e.keyCode === 13) {
       this.addTodo(e.target.value);
       e.target.value = '';
     }
   }
 
+  //a small test to verify the imported primaryList is working as a singleton
+  testListProvider() {
+    console.log('LIST FROM LIST PROVIDER ', primaryList);
+  }
+
+  doSnapshot() {
+    this.state.itemsSnapshot = this.state.list.getItems().slice(); //clone
+    this.setState(this.state);
+  }
+
+  getSnapshot() {
+    return this.state.itemsSnapshot;
+  }
+
   render() {
+    //following used for example of how ActionList acts like a reusable component,
+    //but here it's not showing action buttons or handling actions
+    const renderSnapshot = () => {
+      if (this.state.itemsSnapshot) {
+        return (
+          <div className="snapshot">
+            <ActionList getActionItems={this.getSnapshot} />
+          </div>
+        );
+      }
+    };
+
     return (
       <div>
-        <input onKeyDown={this.doKey} type="text" />
-        <TodoList
-          appData={this.state.appData}
-          deleteTodo={this.deleteTodo} />
+        <div className="todoListBlock">
+          <label htmlFor="todoInput">type item, hit return to add</label>
+          &nbsp;
+          <input id="todoInput" onKeyDown={this.doKey} type="text" />
+          <ActionList
+            getActionItems={this.state.list.getItemsAction}
+            actionButtonHandler={this.deleteTodo}
+            actionName="Delete"
+          />
+        </div>
+        <div className="testBlock">
+          <br />
+          <br />
+          <button onClick={this.testListProvider}>TEST</button>
+          <button onClick={this.doSnapshot}>SNAPSHOT</button>
+        </div>
+        {renderSnapshot()}
       </div>
-    )
+    );
   }
 }
 
