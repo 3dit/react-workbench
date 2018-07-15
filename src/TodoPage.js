@@ -14,6 +14,7 @@ class TodoPage extends React.Component {
     this.addTodo = this.addTodo.bind(this);
     this.doSnapshot = this.doSnapshot.bind(this);
     this.getSnapshot = this.getSnapshot.bind(this);
+    this.getListItems = this.getListItems.bind(this);
   }
 
   addTodo(todoValue) {
@@ -45,7 +46,11 @@ class TodoPage extends React.Component {
   }
 
   getSnapshot() {
-    return this.state.itemsSnapshot;
+    return this.state.itemsSnapshot;//static list is OK, it's a snapshot
+  }
+
+  getListItems() {
+    return this.state.list.getItems();
   }
 
   render() {
@@ -60,7 +65,6 @@ class TodoPage extends React.Component {
         );
       }
     };
-
     return (
       <div>
         <div className="todoListBlock">
@@ -68,7 +72,7 @@ class TodoPage extends React.Component {
           &nbsp;
           <input id="todoInput" onKeyDown={this.doKey} type="text" />
           <ActionList
-            getActionItems={this.state.list.getItemsAction}
+            getActionItems={this.getListItems}
             actionButtonHandler={this.deleteTodo}
             actionName="Delete"
           />

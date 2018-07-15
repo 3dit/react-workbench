@@ -1,0 +1,17 @@
+.todoListBlock .actionItem {
+    width:250px;
+    display:flex;
+    justify-content:space-between;
+    padding:5px;
+  }
+  
+  .snapshot {
+    border:solid 1px gray;
+    padding:10px;
+    background-color:#b8b8b8;
+    font-size:18px;
+    color:blue;
+    width:200px;
+    margin:10px;
+  }
+  

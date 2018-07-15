@@ -7,7 +7,7 @@ import { About } from './About.js';
 import { Home } from './Home.js';
 import TodoPage from './TodoPage.js';
 
-class AppRoot extends React.Component {
+export default class AppRoot extends React.Component {
   constructor(props) {
     super(props);
 
@@ -50,6 +50,3 @@ class AppRoot extends React.Component {
     )
   }
 }
-
-
-export default AppRoot;
