@@ -10,6 +10,7 @@ module.exports = {
         filename: 'index_bundle.js',
         publicPath: '/' // necessary for react-dom-router
     },
+    devtool: 'inline-source-map',
     devServer: {
         historyApiFallback: true // necessary for react-dom-router
     },
