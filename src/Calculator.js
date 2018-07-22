@@ -13,7 +13,6 @@ class Calculator extends React.Component {
     }
 
     pressKey(key) {
-        console.log(key);
         this.calc.pressKey(key);
         this.state.displayValue = `${this.calc.getDisplayValue()}`;
         this.state.seq++;
@@ -21,43 +20,32 @@ class Calculator extends React.Component {
         this.setState(this.state);
     }
 
-    doCalcLogicTest(e) {
-        // const log = (m) => { console.log(m); }
-
-        // const display = () => {
-        //     let value = `==> ${this.calc.getDisplayValue()}`
-        // }
-        this.setState(this.state);
-
-        const press = (k) => {
-            this.pressKey(k);
-        }
-
-        press('1');
-        press('0');
-        press('0');
-        press('Plus');
-        press('2');
-        press('5');
-        press('Plus');
-        press('Clear');
-        press('2');
-        press('5');
-        press('Plus');
-        press('5');
-        press('Equals');
-        press('Clear');
-
-        this.state.q = '99';
-        this.setState(this.state);
+    doCalcLogicTest() {
+        this.pressKey('1');
+        this.pressKey('0');
+        this.pressKey('0');
+        this.pressKey('Plus');
+        this.pressKey('2');
+        this.pressKey('5');
+        this.pressKey('Plus');
+        this.pressKey('Equals');
+        // this.pressKey('Clear');
+        // this.pressKey('2');
+        // this.pressKey('5');
+        // this.pressKey('Plus');
+        // this.pressKey('5');
+        // this.pressKey('Equals');
+        // this.pressKey('Clear');
     }
 
     render() {
 
         const button = (value, action) => {
             action = action ? action : value;
-            //console.log(`${value} val,  ${action} act`);
-            return (<button className="calcButton" onClick={() => { this.pressKey(action) }}>{value}</button>)
+            return (<button className="calcButton"
+                onClick={() => { this.pressKey(action) }}>
+                {value}
+            </button>)
         }
 
         return (

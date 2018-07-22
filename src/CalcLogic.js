@@ -2,7 +2,7 @@
 class CalcLogic {
     constructor() {
         this.display = 0;
-        this.runValue = null;
+        this.runningValue = null;
         this.total = 0;
 
         this.mode = 'None';
@@ -13,24 +13,24 @@ class CalcLogic {
         let parsedKey = parseInt(key);
         if (!isNaN(parsedKey)) {
             //number
-            if (this.runValue === null) this.runValue = 0;
+            if (this.runningValue === null) this.runningValue = 0;
             if (this.mode === 'None') {
                 this.total = 0;
                 this.mode = 'Plus';
             }
-            this.runValue *= 10;
-            this.runValue += parsedKey;
-            this.display = this.runValue;
+            this.runningValue *= 10;
+            this.runningValue += parsedKey;
+            this.display = this.runningValue;
         } else {
             //meta key
             switch (key) {
 
                 case 'Clear':
-                    if (this.runValue !== null) {
-                        this.runValue = null;
+                    if (this.runningValue !== null) {
+                        this.runningValue = null;
                         this.display = 0;
                     } else {
-                        this.runValue = 0;
+                        this.runningValue = 0;
                         this.display = 0;
                         this.total = 0;
                         this.mode = 'None';
@@ -38,11 +38,11 @@ class CalcLogic {
                     break;
 
                 case 'Plus':
-                    if (!isNaN(this.runValue)) {
-                        if(this.mode === 'Minus') this.total -= this.runValue;
-                        if(this.mode === 'Plus') this.total += this.runValue;
+                    if (!isNaN(this.runningValue)) {
+                        if(this.mode === 'Minus') this.total -= this.runningValue;
+                        if(this.mode === 'Plus') this.total += this.runningValue;
                         this.display = this.total;
-                        this.runValue = null;
+                        this.runningValue = null;
                     } else {
                         this.display = this.total;
                     }
@@ -50,11 +50,11 @@ class CalcLogic {
                     break;
 
                 case 'Minus':
-                    if(!isNaN(this.runValue)) {
-                        if(this.mode === 'Minus') this.total -= this.runValue;
-                        if(this.mode === 'Plus') this.total += this.runValue;
+                    if(!isNaN(this.runningValue)) {
+                        if(this.mode === 'Minus') this.total -= this.runningValue;
+                        if(this.mode === 'Plus') this.total += this.runningValue;
                         this.display = this.total;
-                        this.runValue = null;
+                        this.runningValue = null;
                     } else {
                         this.display = this.total;
                     }
@@ -62,15 +62,15 @@ class CalcLogic {
                     break;
 
                 case 'Equals':
-                    if (!isNaN(this.runValue)) {
+                    if (!isNaN(this.runningValue)) {
                         if(this.mode === 'Plus' || this.mode === 'None') {
-                            this.total += this.runValue;
+                            this.total += this.runningValue;
                         } else if (this.mode === 'Minus') {
-                            this.total -= this.runValue;
+                            this.total -= this.runningValue;
                         }
                     }
                     this.display = this.total;
-                    this.runValue = null;
+                    this.runningValue = null;
                     break;
 
                 default:
