@@ -1,6 +1,6 @@
-import List from './List'
+import List from '../List'
 
 //this should make 'primaryList' a singleton when imported
-let primaryList = new List();
+const primaryList = new List();
 
 export { primaryList };

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import CalcLogic from './CalcLogic';
+import {calcLogic} from './Providers/CalcProvider';
 
 class Calculator extends React.Component {
     constructor(props) {
         super(props);
-        this.calc = new CalcLogic();
+        this.calc = calcLogic;
 
-        this.state = { seq: 0, displayValue: '', history: [] };
+        this.state = { seq: 0, displayValue: this.calc.getDisplayValue(), history: [] };
 
         this.doCalcLogicTest = this.doCalcLogicTest.bind(this);
 

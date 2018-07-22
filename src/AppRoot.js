@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import { primaryList } from './ListProvider';
+import { primaryList } from './Providers/ListProvider';
 
 import { About } from './About.js';
 import { Home } from './Home.js';
