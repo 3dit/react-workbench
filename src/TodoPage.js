@@ -63,8 +63,9 @@ class TodoPage extends React.Component {
             <ActionList getActionItems={this.getSnapshot} />
           </div>
         );
-      }
+      } 
     };
+
     return (
       <div>
         <div className="todoListBlock">
@@ -83,7 +84,9 @@ class TodoPage extends React.Component {
           <button onClick={this.testListProvider}>TEST</button>
           <button onClick={this.doSnapshot}>SNAPSHOT</button>
         </div>
+
         {renderSnapshot()}
+
       </div>
     );
   }

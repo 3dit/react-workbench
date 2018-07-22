@@ -14,4 +14,45 @@
     width:200px;
     margin:10px;
   }
+
+  .displayItem {
+    width:75px;
+    display:flex;
+    justify-content: space-between;
+    padding:4px;
+  }
+
+  .calcPad {
+    width:200px;
+  }
+
+  .calcRow {
+    display:flex;
+    justify-content: space-between;
+  }
+
+  .calcRow button {
+    margin:5px;
+    padding:5px;
+    width:80px;
+  }
+
+  .calcDisplay {
+    display:flex;
+    align-items: center;
+    height:30px;
+    width:200px;
+    border:solid 1px #333;
+    background-color:#e8e8e8;
+    color:black;
+    padding:5px;
+  }
   
+  .calcLine {
+    display:flex;
+    justify-content: flex-end;
+    width:100%;
+    font-family: Consolas;
+    font-weight:bold;
+    font-size:1.1em;
+  }

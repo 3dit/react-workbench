@@ -6,6 +6,7 @@ import { primaryList } from './ListProvider';
 import { About } from './About.js';
 import { Home } from './Home.js';
 import TodoPage from './TodoPage.js';
+import Calculator from './Calculator.js';
 
 export default class AppRoot extends React.Component {
   constructor(props) {
@@ -38,6 +39,9 @@ export default class AppRoot extends React.Component {
             <li>
               <Link to="/todolist">ToDo List</Link>
             </li>
+            <li>
+              <Link to="/calculator">Calculator</Link>
+            </li>
           </ul>
 
           <hr />
@@ -45,6 +49,8 @@ export default class AppRoot extends React.Component {
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/todolist" component={todoPage} />
+          <Route path="/calculator" component={Calculator} />
+
         </div>
       </Router>
     )
