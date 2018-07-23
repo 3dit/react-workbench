@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import {calcLogic} from './Providers/CalcProvider';
+import { calcLogic } from './Providers/CalcProvider';
 
 class Calculator extends React.Component {
     constructor(props) {
         super(props);
         this.calc = calcLogic;
 
-        this.state = { seq: 0, displayValue: this.calc.getDisplayValue(), history: [] };
+        this.state = {
+            seq: 0,
+            displayValue: this.calc.getDisplayValue(),
+            history: [] /* testing, debugging */
+        };
 
         this.doCalcLogicTest = this.doCalcLogicTest.bind(this);
-
     }
 
     pressKey(key) {
@@ -42,7 +45,15 @@ class Calculator extends React.Component {
 
         const button = (value, action) => {
             action = action ? action : value;
-            return (<button className="calcButton"
+            return (<button className="slot key"
+                onClick={() => { this.pressKey(action) }}>
+                {value}
+            </button>)
+        }
+
+        const tallButton = (value, action) => {
+            action = action ? action : value;
+            return (<button className="tall key"
                 onClick={() => { this.pressKey(action) }}>
                 {value}
             </button>)
@@ -53,56 +64,52 @@ class Calculator extends React.Component {
                 <h1>Calculator</h1>
                 <br />
 
-                <div className="calcDisplay">
-                    <div className="calcLine">
-                        {this.state.displayValue}
+                <div className="mainContainer">
+
+                    <div className="displayContainer">
+
+                        <div className="display">
+
+                            <div className="readout">
+
+                                {this.state.displayValue}
+
+                            </div>
+
+                        </div>
+
                     </div>
+
+                    <div class="keys">
+
+
+                        <div class="keycontainer">
+
+                            {button('7')}
+                            {button('8')}
+                            {button('9')}
+                            {button('+', 'Plus')}
+
+                            {button('4')}
+                            {button('5')}
+                            {button('6')}
+                            {button('-', 'Minus')}
+
+                            {button('1')}
+                            {button('2')}
+                            {button('3')}
+                            {tallButton('=', 'Equals')}
+
+                            {button('C', 'Clear')}
+                            {button('0')}
+                            {button('T')}
+
+                        </div>
+
+
+                    </div>
+
                 </div>
-
-                <br />
-
-                <div className="calcPad">
-                    <div className="calcRow">
-                        {button('7')}
-                        {button('8')}
-                        {button('9')}
-                    </div>
-                    <div className="calcRow">
-                        {button('4')}
-                        {button('5')}
-                        {button('6')}
-                    </div>
-                    <div className="calcRow">
-                        {button('1')}
-                        {button('2')}
-                        {button('3')}
-                    </div>
-                    <div className="calcRow">
-                        <div></div>
-                        {button('0')}
-                        <div></div>
-                    </div>
-                    <div className="calcRow">
-                        {button('C', 'Clear')}
-                        {button('+', 'Plus')}
-                        {button('-', 'Minus')}
-                        {button('=', 'Equals')}
-                    </div>
-
-                </div>
-
-                <br />
-                <div>
-                    {
-                        // this.state.history.map(item => {
-                        //     return (<div className='displayItem' key={item.seq}><div>{item.leftValue}</div><div>===></div><div>{item.rightValue}</div></div>);
-                        // })
-                    }
-                </div>
-
-                <br />
-                <br />
-                <button onClick={this.doCalcLogicTest}>Run Test</button>
             </div>
         );
     }
