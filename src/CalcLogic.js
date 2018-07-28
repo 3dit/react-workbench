@@ -1,4 +1,5 @@
 
+
 class CalcLogic {
     constructor() {
         this.display = 0;
@@ -11,7 +12,7 @@ class CalcLogic {
     isNumber(number) {
         return !isNaN(number) && number !== null;
     }
- 
+   
     pressKey(key) {
         let n = 0;
         let parsedKey = parseInt(key);
@@ -32,10 +33,9 @@ class CalcLogic {
 
         } else {
 
-            //meta key
             switch (key) {
-
                 case 'Clear':
+
                     if (this.isNumber(this.runningValue)) {
                         this.runningValue = null;
                     } else {
@@ -46,65 +46,39 @@ class CalcLogic {
                     this.display = 0;
                     break;
 
+
                 case 'Plus':
-                    if (this.isNumber(this.runningValue)) {
-                        if(this.mode === 'Minus') {
-                            this.total -= this.runningValue;
-                            this.runningValue = 0;
-                        }
-                        if(this.mode === 'Plus') {
-                            this.total += this.runningValue;
-                            this.runningValue = 0;
-                        }
-                    }
-                    this.display = this.total;
-                    this.mode = 'Plus';
-
-                    break;
-
                 case 'Minus':
-                    if (this.isNumber(this.runningValue)) {    
-                        if(this.mode === 'Minus') {
-                            this.total -= this.runningValue;
-                            this.runningValue = 0;
-                        }
-                        if(this.mode === 'Plus') {
-                            this.total += this.runningValue;
-                            this.runningValue = 0;
-                        }
-                    }
-                    this.display = this.total;
-                    this.mode = 'Minus';
-
-                    break;
-
                 case 'Multiply':
+
                     if (this.isNumber(this.runningValue)) {
-                        if(this.mode === 'Minus') {
+                        if (this.mode === 'Minus') {
                             this.total -= this.runningValue;
                             this.runningValue = 0;
                         }
-                        if(this.mode === 'Plus') {
+                        if (this.mode === 'Plus') {
                             this.total += this.runningValue;
                             this.runningValue = 0;
                         }
-                        if(this.mode === 'Multiply') {
+                        if (this.mode === 'Multiply') {
                             this.total *= this.runningValue;
                             this.runningValue = 0;
                         }
-                    } 
+                    }
                     this.display = this.total;
-                    this.mode = 'Multiply';
+                    this.mode = key;
+
                     break;
 
 
                 case 'Equals':
+
                     if (this.isNumber(this.runningValue)) {
                         if (this.mode === 'Plus' || this.mode === 'None') {
                             this.total += this.runningValue;
                         } else if (this.mode === 'Minus') {
                             this.total -= this.runningValue;
-                        } else if(this.mode === 'Multiply') {
+                        } else if (this.mode === 'Multiply') {
                             this.total *= this.runningValue;
                         }
                     }
@@ -112,8 +86,10 @@ class CalcLogic {
                     this.runningValue = null;
                     break;
 
+
                 default:
-                    this.display = 'Error';
+                
+                    this.display = 'error';
                     break;
             }
         }
