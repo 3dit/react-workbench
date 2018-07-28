@@ -80,10 +80,10 @@ class Calculator extends React.Component {
 
                     </div>
 
-                    <div class="keys">
+                    <div className="keys">
 
 
-                        <div class="keycontainer">
+                        <div className="keycontainer">
 
                             {button('7')}
                             {button('8')}
@@ -102,7 +102,7 @@ class Calculator extends React.Component {
 
                             {button('C', 'Clear')}
                             {button('0')}
-                            {button('T')}
+                            {button('*', 'Multiply')}
 
                         </div>
 
