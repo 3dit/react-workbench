@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { calcLogic } from './Providers/CalcProvider';
+import objectAssign from 'object-assign';
 
 class Calculator extends React.Component {
+
     constructor(props) {
         super(props);
         this.calc = calcLogic;
@@ -11,34 +13,34 @@ class Calculator extends React.Component {
             displayValue: this.calc.getDisplayValue(),
             history: [] /* testing, debugging */
         };
-
-        this.doCalcLogicTest = this.doCalcLogicTest.bind(this);
     }
 
     pressKey(key) {
-        this.calc.pressKey(key);
-        this.state.displayValue = `${this.calc.getDisplayValue()}`;
-        this.state.seq++;
-        this.state.history.push({ seq: this.state.seq, leftValue: `[${key}]`, rightValue: this.state.displayValue });
-        this.setState(this.state);
-    }
+        let newState;
+        let newEvent;
+    
+        this.calc.doPressKey3(key);
+        
+        let newSeq = this.state.seq + 1;
 
-    doCalcLogicTest() {
-        this.pressKey('1');
-        this.pressKey('0');
-        this.pressKey('0');
-        this.pressKey('Plus');
-        this.pressKey('2');
-        this.pressKey('5');
-        this.pressKey('Plus');
-        this.pressKey('Equals');
-        // this.pressKey('Clear');
-        // this.pressKey('2');
-        // this.pressKey('5');
-        // this.pressKey('Plus');
-        // this.pressKey('5');
-        // this.pressKey('Equals');
-        // this.pressKey('Clear');
+        let updatedHistory = this.state.history.slice();//clone
+
+        newEvent = {
+            seq: this.state.seq + 1,
+            leftValue: `[${key}]`,
+            rightValue: this.state.displayValue
+        }
+
+        updatedHistory.push(newEvent);
+
+        newState = objectAssign({}, this.state, {
+            displayValue:  `${this.calc.getDisplayValue()}`,
+            seq: newSeq,
+            history : updatedHistory
+        });
+
+        this.setState(newState);
+
     }
 
     render() {
@@ -61,7 +63,7 @@ class Calculator extends React.Component {
 
         return (
             <div>
-                <h1>Calculator</h1>
+                <h1>Player Transaction (integer) Calculator</h1>
                 <br />
 
                 <div className="mainContainer">

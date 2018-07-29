@@ -1,6 +1,17 @@
 
-
 class CalcLogic {
+
+    //Arrow functions are lexically scoped so we don't have to explicitly bind to 'this'.
+    //https://javascriptweblog.wordpress.com/2015/11/02/of-classes-and-arrow-functions-a-cautionary-tale/
+    //However using this statically scoped property means it is redefined every time this class
+    //is instanced, which in this case is only once so here this is no performance issue.
+    //Class properties are an ES7 (proposed?) feature, babel has to be configured to handle this with
+    //appropriate transform plugin
+    doPressKey = key => {
+        console.log(`class property ${key}`);
+        return this.pressKey(key);
+    }
+
     constructor() {
         this.display = 0;
         this.runningValue = null;
@@ -12,7 +23,10 @@ class CalcLogic {
 
         this.sequence = [];
 
-        this.pressKey = this.pressKey.bind(this);
+        //Other ways to avoid binding explicitly
+        this.doPressKey2 = e => this.pressKey(e);
+        this.doPressKey3 = (...args) => this.pressKey(...args);
+        //this.pressKey = this.pressKey.bind(this);
     }
 
     isNumber(number) {
@@ -37,7 +51,7 @@ class CalcLogic {
             v += this.sequence[j] * factor;
         }
 
-        if(hasDecimal) {
+        if (hasDecimal) {
             for (let k = di + 1; k < this.sequence.length; k++) {
                 var delta = this.sequence.length - k;
                 let factor = 1 / Math.pow(10, delta);
@@ -50,7 +64,7 @@ class CalcLogic {
 
     getDisplayValue() {
         return this.display;
-        
+
         /*
         var d = '';
         for(let i=0; i < this.sequence.length; i++) {
@@ -62,7 +76,7 @@ class CalcLogic {
 
     getDisplayFromSequence() {
         var d = '';
-        for(let i=0; i < this.sequence.length; i++) {
+        for (let i = 0; i < this.sequence.length; i++) {
             d = d + `${this.sequence[i]}`;
         }
         return d == '' ? 0 : d;
@@ -72,7 +86,7 @@ class CalcLogic {
     getSequenceFromValue(value) {
         let svalue = `${value}`;
         let seq = [];
-        for(let i = 0; i < svalue.length; i++) {
+        for (let i = 0; i < svalue.length; i++) {
             seq.push(svalue.substr(i, 1));
         }
         return seq;
@@ -94,8 +108,8 @@ class CalcLogic {
             this.sequence.push(parseInt(parsedKey));
             //this.runningValue = this.getValue();
             this.display = this.getDisplayFromSequence();
-            this.runningValue= this.getValue();
-            
+            this.runningValue = this.getValue();
+
 
             if (this.mode === 'None') {
                 this.total = 0;
@@ -147,10 +161,10 @@ class CalcLogic {
 
                 case 'Decimal':
 
-                    if(this.runningValue === null) {
+                    if (this.runningValue === null) {
                         this.runningValue = 0;
                     }
-                    if(this.runningValue === 0) {
+                    if (this.runningValue === 0) {
                         this.display = '0.';
                     }
 
@@ -182,7 +196,7 @@ class CalcLogic {
                         } else if (this.mode === 'Divide') {
                             this.total /= this.runningValue;
                             this.runningValue = 0;
-                        } 
+                        }
                         else {
                             this.total = this.runningValue;
                             this.runningValue = null;
@@ -217,7 +231,7 @@ class CalcLogic {
                     this.display = this.total;
                     this.runningValue = null;
                     this.sequence = [];
-                    
+
                     //this.getSequenceFromValue( this.total );
 
                     this.decimalMode = false;
