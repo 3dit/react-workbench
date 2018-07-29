@@ -104,6 +104,9 @@ class Calculator extends React.Component {
                             {button('0')}
                             {button('*', 'Multiply')}
 
+                            {button('/', 'Divide')}
+                            {button('.', 'Decimal')}
+                            {button('')}
                         </div>
 
 
