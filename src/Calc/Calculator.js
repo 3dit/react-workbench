@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { calcLogic } from './CalcProvider';
 import objectAssign from 'object-assign';
+import * as CALC from './CalcActions';
 
 class Calculator extends React.Component {
 
@@ -90,25 +91,29 @@ class Calculator extends React.Component {
                             {button('7')}
                             {button('8')}
                             {button('9')}
-                            {button('+', 'Plus')}
+                            {button('+', CALC.PLUS)}
 
                             {button('4')}
                             {button('5')}
                             {button('6')}
-                            {button('-', 'Minus')}
+                            {button('-', CALC.MINUS)}
 
                             {button('1')}
                             {button('2')}
                             {button('3')}
-                            {tallButton('=', 'Equals')}
+                            {tallButton('=', CALC.EQUALS)}
 
-                            {button('C', 'Clear')}
+                            {button('C', CALC.CLEAR)}
                             {button('0')}
-                            {button('*', 'Multiply')}
+                            {button('*', CALC.MULTIPLY)}
 
-                            {button('/', 'Divide')}
-                            {button('.', 'Decimal')}
-                            {button('')}
+
+                            {/*
+                            {button('/', CALC.DIVIDE)}
+                            {button('.', CALC.DECIMAL)}
+                            {button('')} 
+                            */}
+
                         </div>
 
 

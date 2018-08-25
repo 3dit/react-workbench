@@ -1,3 +1,5 @@
+import * as CALC from './CalcActions'
+
 class CalcLogic {
 
     //Arrow functions are lexically scoped so we don't have to explicitly bind to 'this'.
@@ -16,7 +18,7 @@ class CalcLogic {
         this.runningValue = null;
         this.total = 0;
         this.decimalMode = false;
-        this.mode = 'None';
+        this.mode = CALC.NONE;
         this.multiplier = 10;
         this.factor = 1;
 
@@ -110,9 +112,9 @@ class CalcLogic {
             this.runningValue = this.getValue();
 
 
-            if (this.mode === 'None') {
+            if (this.mode === CALC.NONE) {
                 this.total = 0;
-                this.mode = 'Plus';
+                this.mode = CALC.PLUS;
             }
 
             // if(this.decimalMode) {
@@ -138,14 +140,14 @@ class CalcLogic {
 
             switch (key) {
 
-                case 'Clear':
+                case CALC.CLEAR:
 
                     if (this.isNumber(this.runningValue)) {
                         this.runningValue = null;
                     } else {
                         this.runningValue = 0;
                         this.total = 0;
-                        this.mode = 'None';
+                        this.mode = CALC.NONE;
                     }
 
                     this.display = 0;
@@ -158,7 +160,7 @@ class CalcLogic {
                     break;
 
 
-                case 'Decimal':
+                case CALC.DECIMAL:
 
                     if (this.runningValue === null) {
                         this.runningValue = 0;
@@ -177,22 +179,22 @@ class CalcLogic {
                     break;
 
 
-                case 'Plus':
-                case 'Minus':
-                case 'Multiply':
-                case 'Divide':
+                case CALC.PLUS:
+                case CALC.MINUS:
+                case CALC.MULTIPLY:
+                case CALC.DIVIDE:
 
                     if (this.isNumber(this.runningValue)) {
-                        if (this.mode === 'Minus') {
+                        if (this.mode === CALC.MINUS) {
                             this.total -= this.runningValue;
                             this.runningValue = 0;
-                        } else if (this.mode === 'Plus') {
+                        } else if (this.mode === CALC.PLUS) {
                             this.total += this.runningValue;
                             this.runningValue = 0;
-                        } else if (this.mode === 'Multiply') {
+                        } else if (this.mode === CALC.MULTIPLY) {
                             this.total *= this.runningValue;
                             this.runningValue = 0;
-                        } else if (this.mode === 'Divide') {
+                        } else if (this.mode === CALC.DIVIDE) {
                             this.total /= this.runningValue;
                             this.runningValue = 0;
                         }
@@ -214,16 +216,16 @@ class CalcLogic {
                     break;
 
 
-                case 'Equals':
+                case CALC.EQUALS:
 
                     if (this.isNumber(this.runningValue)) {
-                        if (this.mode === 'Plus' || this.mode === 'None') {
+                        if (this.mode === CALC.PLUS || this.mode === CALC.NONE) {
                             this.total += this.runningValue;
-                        } else if (this.mode === 'Minus') {
+                        } else if (this.mode === CALC.MINUS) {
                             this.total -= this.runningValue;
-                        } else if (this.mode === 'Multiply') {
+                        } else if (this.mode === CALC.MULTIPLY) {
                             this.total *= this.runningValue;
-                        } else if (this.mode === 'Divide') {
+                        } else if (this.mode === CALC.DIVIDE) {
                             this.total /= this.runningValue;
                         }
                     }
