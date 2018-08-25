@@ -14,9 +14,17 @@ To run, install npm packages (of course):
     
     $ npm install
 
+    - or using yarn -
+
+    $ yarn
+
 Then build:
 
     $ npm run-script build
+
+    - or using yarn -
+
+    $ yarn run build
 
 This will create the dist/index_bundle.js bundle which allows you to run the application:
 
