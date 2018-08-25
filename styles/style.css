@@ -142,6 +142,15 @@
     border-radius:10px;
     background-color:#e8e8e8;
   }
+
+  .key:hover, .key:focus {
+    outline : 0;
+    -moz-outline : 0;
+  }
+
+  .key:hover {
+    border-color:#606060;
+  }
   
   /* Flexbox Fallback */
   
