@@ -1,4 +1,4 @@
-import CalcLogic from '../CalcLogic'
+import CalcLogic from './CalcLogic'
 
 const calcLogic = new CalcLogic();
 

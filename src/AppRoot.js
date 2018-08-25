@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-import { primaryList } from './Providers/ListProvider';
+import { primaryList } from './TodoList/ListProvider';
 
-import { About } from './About.js';
-import { Home } from './Home.js';
-import TodoPage from './TodoPage.js';
-import Calculator from './Calculator.js';
+import { About } from './About';
+import { Home } from './Home';
+import TodoPage from './TodoList/TodoPage';
+import Calculator from './Calc/Calculator';
 
 export default class AppRoot extends React.Component {
   constructor(props) {

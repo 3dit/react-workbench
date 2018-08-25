@@ -1,4 +1,3 @@
-
 class CalcLogic {
 
     //Arrow functions are lexically scoped so we don't have to explicitly bind to 'this'.

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ActionList from './ActionList';
-import { primaryList } from './Providers/ListProvider';
+import { primaryList } from './ListProvider';
 
 class TodoPage extends React.Component {
   constructor(props) {

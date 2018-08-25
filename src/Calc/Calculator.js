@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { calcLogic } from './Providers/CalcProvider';
+import { calcLogic } from './CalcProvider';
 import objectAssign from 'object-assign';
 
 class Calculator extends React.Component {
