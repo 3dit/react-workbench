@@ -84,6 +84,18 @@
     margin-bottom: -1px;
     
   }
+
+  .calcTitle {
+    display: flex;
+    justify-content: center;
+    width:100%;
+  }
+
+  .txContainer {
+    display: flex;
+    justify-content:space-around;
+  }
+
   
   .display {
     display: flex;
@@ -132,6 +144,16 @@
     margin:5px;
     
     grid-row: 3 / span 2;
+    grid-column: 4 / span 1;
+  }
+
+  .wide {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    margin:5px;
+
+    grid-row: 2 / span 2;
     grid-column: 4 / span 1;
   }
   

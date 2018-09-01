@@ -2,6 +2,8 @@
     ./webpack.config.js
 */
 const path = require('path');
+const webpack = require('webpack');
+
 module.exports = {
     mode: 'development',
     entry: './src/index.js',
@@ -12,15 +14,20 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     devServer: {
-        historyApiFallback: true // necessary for react-dom-router
+        historyApiFallback: true, // necessary for react-dom-router
+        hot: true
     },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+      ],
     module: {
         rules: [
             {
                 test: /\.css$/,
                 use: [
                     { loader: "style-loader" },
-                    { loader: "css-loader" }
+                    { loader: "css-loader" },
+                    { loader: "babel-loader" }
                 ]
             },
             {

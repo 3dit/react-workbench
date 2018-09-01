@@ -61,65 +61,61 @@ class Calculator extends React.Component {
                 {value}
             </button>)
         }
-
+ 
         return (
-            <div>
-                <h1>Player Transaction (integer) Calculator</h1>
-                <br />
 
-                <div className="mainContainer">
+            <div className="mainContainer">
 
-                    <div className="displayContainer">
+                <div className="displayContainer">
 
-                        <div className="display">
+                    <div className="display">
 
-                            <div className="readout">
+                        <div className="readout">
 
-                                {this.state.displayValue}
-
-                            </div>
+                            {this.state.displayValue}
 
                         </div>
-
-                    </div>
-
-                    <div className="keys">
-
-
-                        <div className="keycontainer">
-
-                            {button('7')}
-                            {button('8')}
-                            {button('9')}
-                            {button('+', CALC.PLUS)}
-
-                            {button('4')}
-                            {button('5')}
-                            {button('6')}
-                            {button('-', CALC.MINUS)}
-
-                            {button('1')}
-                            {button('2')}
-                            {button('3')}
-                            {tallButton('=', CALC.EQUALS)}
-
-                            {button('C', CALC.CLEAR)}
-                            {button('0')}
-                            {button('*', CALC.MULTIPLY)}
-
-
-                            {/*
-                            {button('/', CALC.DIVIDE)}
-                            {button('.', CALC.DECIMAL)}
-                            {button('')} 
-                            */}
-
-                        </div>
-
 
                     </div>
 
                 </div>
+
+                <div className="keys">
+
+
+                    <div className="keycontainer">
+
+                        {button('7')}
+                        {button('8')}
+                        {button('9')}
+                        {button('+', CALC.PLUS)}
+
+                        {button('4')}
+                        {button('5')}
+                        {button('6')}
+                        {button('-', CALC.MINUS)}
+
+                        {button('1')}
+                        {button('2')}
+                        {button('3')}
+                        {tallButton('=', CALC.EQUALS)}
+
+                        {button('C', CALC.CLEAR)}
+                        {button('0')}
+                        {button('*', CALC.MULTIPLY)}
+
+
+                        {/*   
+                        {button('/', CALC.DIVIDE)}
+                        {button('.', CALC.DECIMAL)}
+                        {button('')} 
+                        */}
+
+                    </div>
+
+
+                </div>
+
             </div>
         );
     }
