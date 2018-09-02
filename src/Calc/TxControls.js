@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { calcLogic } from './CalcProvider';
 import objectAssign from 'object-assign';
 import * as CALC from './CalcActions';
+import txService from './TxService';
 
 class TxControls extends React.Component {
 
@@ -9,16 +10,36 @@ class TxControls extends React.Component {
         super(props);
         //this.tx = txLogic;
 
-        this.state = {
+        this.buttonEventHandler = props.buttonEventHandler;
+
+        txService.setDefaultConfiguration();
+
+        var initialState = {
             seq: 0,
-            history: [] /* testing, debugging */
+            history: [], /* testing, debugging */
+            players: txService.getPlayers()
         };
+
+        this.state = initialState;
+
+        this.doButtonEvent = this.doButtonEvent.bind(this);
+
+        this.txButtons = [
+            {
+                name: 'To',
+                handler: this.doButtonEvent,
+                action: 'TxTo'
+            }, {
+                name: 'From',
+                handler: this.doButtonEvent,
+                action: 'TxFrom'
+            }];
     }
 
     pressKey(key) {
         let newState;
         let newEvent;
-    
+
         let newSeq = this.state.seq + 1;
 
         let updatedHistory = this.state.history.slice();//clone
@@ -33,11 +54,15 @@ class TxControls extends React.Component {
 
         newState = objectAssign({}, this.state, {
             seq: newSeq,
-            history : updatedHistory
+            history: updatedHistory
         });
 
         this.setState(newState);
 
+    }
+
+    doButtonEvent(event) {
+        this.buttonEventHandler(event);
     }
 
     render() {
@@ -50,13 +75,19 @@ class TxControls extends React.Component {
             </button>)
         }
 
-        const wideButton = (value, action) => {
+        const playerButton = (value, action) => {
             action = action ? action : value;
             return (<button className="wide key"
                 onClick={() => { this.pressKey(action) }}>
                 {value}
             </button>)
         }
+
+        var doButtonEvent = this.doButtonEvent;//why is this necessary?
+
+        const playerButtons = this.state.players.map(function (player, index) {
+            return (<li key={player.id} onClick={() => { doButtonEvent({ type: 'player', data: player }) }}>{playerButton(player.name)}</li>)
+        });
 
         return (
 
@@ -66,10 +97,37 @@ class TxControls extends React.Component {
 
                     <div className="txControlsContainer">
 
-                        {wideButton('Scott')}
-                        {wideButton('Michelle')}
-                        {wideButton('Gabe')}
-                        {wideButton('zzz!')}
+                        <div style={{display:'flex'}}>
+                            <ul>
+                                {
+                                    this.txButtons.map(function (button) {
+                                        return (
+                                            <li key={button.name} onClick={() => button.handler({ type: 'tx', data: button.name })}>
+                                                {playerButton(button.name)}
+                                            </li>
+                                        );
+                                    })
+                                }
+                            </ul>
+                        </div>
+                        <div style={{display:'flex'}}>
+                            <ul>
+                                {
+                                    this.state.players.map(function (player, index) {
+                                        return (
+                                            <li key={player.id}
+                                                onClick={
+                                                    () => {
+                                                        doButtonEvent({ type: 'player', data: player })
+                                                    }
+                                                }>
+                                                {playerButton(player.name)}
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </div>
 
                     </div>
 

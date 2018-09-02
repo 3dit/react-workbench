@@ -7,6 +7,9 @@ class Calculator extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.calcEvent = props.calcEvent;
+
         this.calc = calcLogic;
 
         this.state = {
@@ -19,9 +22,9 @@ class Calculator extends React.Component {
     pressKey(key) {
         let newState;
         let newEvent;
-    
+
         this.calc.doPressKey3(key);
-        
+
         let newSeq = this.state.seq + 1;
 
         let updatedHistory = this.state.history.slice();//clone
@@ -34,14 +37,23 @@ class Calculator extends React.Component {
 
         updatedHistory.push(newEvent);
 
+        let calcDisplayValue = this.calc.getDisplayValue();
+
         newState = objectAssign({}, this.state, {
-            displayValue:  `${this.calc.getDisplayValue()}`,
+            displayValue: `${calcDisplayValue}`,
             seq: newSeq,
-            history : updatedHistory
+            history: updatedHistory
         });
-
+        
         this.setState(newState);
-
+        
+        if (this.calcEvent) {
+            let updatedDisplay = {
+                displayValue: calcDisplayValue,
+                numericValue: parseInt(calcDisplayValue)
+            }
+            this.calcEvent(updatedDisplay);
+        }
     }
 
     render() {
@@ -61,7 +73,7 @@ class Calculator extends React.Component {
                 {value}
             </button>)
         }
- 
+
         return (
 
             <div className="mainContainer">
