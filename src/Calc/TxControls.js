@@ -22,17 +22,16 @@ class TxControls extends React.Component {
 
         this.state = initialState;
 
-        this.doButtonEvent = this.doButtonEvent.bind(this);
-
         this.txButtons = [
             {
-                name: 'To',
-                handler: this.doButtonEvent,
-                action: 'TxTo'
-            }, {
                 name: 'From',
-                handler: this.doButtonEvent,
+                handler: props.buttonEventHandler,
                 action: 'TxFrom'
+            },
+            {
+                name: 'To',
+                handler: props.buttonEventHandler,
+                action: 'TxTo'
             }];
     }
 
@@ -61,32 +60,37 @@ class TxControls extends React.Component {
 
     }
 
-    doButtonEvent(event) {
-        this.buttonEventHandler(event);
-    }
-
     render() {
 
         const button = (value, action) => {
             action = action ? action : value;
-            return (<button className="slot key"
-                onClick={() => { this.pressKey(action) }}>
-                {value}
-            </button>)
+            return (
+                <button className="slot key"
+                    onClick={() => { this.pressKey(action) }}>
+                    {value}
+                </button>
+            )
         }
 
         const playerButton = (value, action) => {
             action = action ? action : value;
-            return (<button className="wide key"
-                onClick={() => { this.pressKey(action) }}>
-                {value}
-            </button>)
+            return (
+                <button className="wide key"
+                    onClick={() => { this.pressKey(action) }}>
+                    {value}
+                </button>
+            )
         }
 
-        var doButtonEvent = this.doButtonEvent;//why is this necessary?
-
-        const playerButtons = this.state.players.map(function (player, index) {
-            return (<li key={player.id} onClick={() => { doButtonEvent({ type: 'player', data: player }) }}>{playerButton(player.name)}</li>)
+        const playerButtons = this.state.players.map((player) => {
+            console.log('playerButtons func', arguments);
+            return (
+                <li key={player.id}
+                    onClick={() => { this.buttonEventHandler({ type: 'player', data: player }) }}
+                >
+                    {playerButton(player.name)}
+                </li>
+            )
         });
 
         return (
@@ -97,12 +101,14 @@ class TxControls extends React.Component {
 
                     <div className="txControlsContainer">
 
-                        <div style={{display:'flex'}}>
+                        <div style={{ display: 'flex' }}>
                             <ul>
                                 {
-                                    this.txButtons.map(function (button) {
+                                    this.txButtons.map((button) => {
                                         return (
-                                            <li key={button.name} onClick={() => button.handler({ type: 'tx', data: button.name })}>
+                                            <li key={button.name}
+                                                onClick={ () => this.buttonEventHandler({ type: 'tx', data: button.name }) }
+                                            >
                                                 {playerButton(button.name)}
                                             </li>
                                         );
@@ -110,16 +116,14 @@ class TxControls extends React.Component {
                                 }
                             </ul>
                         </div>
-                        <div style={{display:'flex'}}>
+                        <div style={{ display: 'flex' }}>
                             <ul>
                                 {
-                                    this.state.players.map(function (player, index) {
+                                    this.state.players.map((player) => {
                                         return (
                                             <li key={player.id}
                                                 onClick={
-                                                    () => {
-                                                        doButtonEvent({ type: 'player', data: player })
-                                                    }
+                                                    () => this.buttonEventHandler({ type: 'player', data: player })
                                                 }>
                                                 {playerButton(player.name)}
                                             </li>
