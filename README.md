@@ -1,10 +1,8 @@
 ### react-workbench
 
-This is a simple react excercise in react routing and implemntation of a simple to-do list.
+This is a simple react excercise in react routing and implemntation of a simple to-do list and a 'player calculator' board game transaction tool.
 
-It only uses react, and is my first 'real' react application using only react and is meant to get my react sea legs going. This definately is not ready for prime time, just me having fun and learning basic react.
-
-Initially this was created from a simple plnkr.co alpha zip download I created. I added webpack with babel to get it running on my local system.
+This is my first 'real' react application using only react (w/o redux) and is meant to get my react sea legs going. This definately is not ready for prime time, just me having fun and learning basic react.
 
 Requires webpack-dev-server (I prefer globally) installed:
 
