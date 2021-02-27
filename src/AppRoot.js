@@ -7,6 +7,7 @@ import { About } from './About';
 import { Home } from './Home';
 import TodoPage from './TodoList/TodoPage';
 import Calculator from './Calc/Calculator';
+import Game from './tictactoe/Game';
 
 export default class AppRoot extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ export default class AppRoot extends React.Component {
     const todoPage = () => {
       return (<TodoPage list={this.list}/>)
     };
+
     
     return(
       <Router>
@@ -42,6 +44,9 @@ export default class AppRoot extends React.Component {
             <li>
               <Link to="/calculator">Calculator</Link>
             </li>
+            <li>
+              <Link to="/tictactoe">TicTacToe</Link>
+            </li>
           </ul>
 
           <hr />
@@ -50,6 +55,7 @@ export default class AppRoot extends React.Component {
           <Route path="/about" component={About} />
           <Route path="/todolist" component={todoPage} />
           <Route path="/calculator" component={Calculator} />
+          <Route path="/tictactoe" component={Game} />
 
         </div>
       </Router>
